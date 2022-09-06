@@ -68,3 +68,18 @@ How do you handle software failures, i.e. non-monotonic clocks?
 How is the uniqueness assured if the **sequence id** overflows?
 
 > When the sequence id reaches the maximum value, the method waits for the next millisecond to proceed with the logic.
+
+## Performance test results
+
+Worker starting with...
+
+- workerIdSize: 10
+- sequenceSize: 14
+- workerId: 0
+- epoch: 1662492047972
+
+---
+
+- time passed: 0.258s
+- uuids generated: 1956333
+- UUIDs/sec: 7582686.05
