@@ -1,0 +1,23 @@
+{
+  "name": "uuid-distributed-generator",
+  "version": "1.0.0",
+  "description": "## Challenge",
+  "main": "main.js",
+  "scripts": {
+    "test:performance": "node ./lib/tests/performance/main.js",
+    "test:unit": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladmihaisavin/uuid-distributed-generator.git"
+  },
+  "author": "Vlad-Mihai Savin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vladmihaisavin/uuid-distributed-generator/issues"
+  },
+  "homepage": "https://github.com/vladmihaisavin/uuid-distributed-generator#readme",
+  "devDependencies": {
+    "jest": "^29.0.2"
+  }
+}
