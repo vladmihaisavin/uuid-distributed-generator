@@ -15,7 +15,7 @@ Assume that any node will not receive more than 100,000 requests per second.
    2. The resources are created at some point in time, and we would like to keep track of that, in order to easily sort them. Thus, we will include a **timestamp** in our UUID.
 2. We know that we have up to 1024 nodes in our system. We can't use only the timestamp to uniquely identify a resource, because 1024 nodes will generate at least 1024 identical ids. We will include the **worker id** in the UUID as well.
 3. We don't know what are the configurations of the machines hosting the nodes, but we do know that each node runs a process which serves ids. We will assume that only **one thread** is used per node.
-4. We have a timestamp and a worker id, but the processor is fast enough to generate multiple UUIDs per millisecond (we expect 100k req/s, so 100 req/ms). We need a mechanism to generate at least 100 unique ids in a millisecond. We'll use a **sequence id**, or a counter.
+4. We have a timestamp and a worker id, but each node's processor is fast enough to generate multiple UUIDs per millisecond (we expect 100k req/s, so 100 req/ms). We need a mechanism to generate at least 100 unique ids in a millisecond. We'll use a **sequence id** for each node, or a counter. Even if two nodes have the same sequence id, the worker id will be different, assuring the uniqueness of the UUID.
 
 ## UUID Structure
 
@@ -34,6 +34,10 @@ We know that the UUIDs are 64 bits long, so a proposed decomposition is:
    2. With 13 bits we would mitigate 8192 conflicts and we would generate about 300k uuids per second, per thread.
    3. With 14 bits we would generate more than 7.5mil uuids per second, per thread.
    4. Given the fact that we expect 100k requests per second, _12 bits_ should suffice, but we don't need to offer support for multi-threading, so we will use **14 bits**.
+
+### Note
+
+If we want to use multithreading, we can reduce the bit size of the sequence and allocate memory for a thread id.
 
 ## get_id interface
 
